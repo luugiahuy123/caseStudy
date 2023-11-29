@@ -17,6 +17,13 @@
 <script>
     let canvas = document.getElementById('game');
     let context = canvas.getContext('2d');
+    let ball = {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        dx: 10,
+        dy: 10,
+        radius: 50,
+    };
 
 </script>
 </body>
