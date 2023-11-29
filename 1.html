@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>bắn bóng hay bị bóng bắn</title>
     <style>
         #game {
             border: 1px solid black;
-            background-image: url("");
+            background-image: url("https://i.pinimg.com/originals/8e/e0/75/8ee075b2aaf0a9cd82fdd03a502ea7bc.gif");
         }
     </style>
 </head>
 <body>
-<audio>
-    <source src="" type="audio/mp3">
+<button id="start">Bắt đầu</button>
+<button id="increaseSpeed">Tăng tốc độ</button>
+<button id="increaseSize">Tăng kích thước</button>
+<button id="downSpeed">Giảm tốc độ</button>
+<button id="downSize">Giảm kích thước</button>
+<audio id="audio2" loop>
+    <source src="bai2.mp3" type="audio/mp3">
+</audio>
+<audio id="audio4" loop>
+    <source src="bai4.mp3" type="audio/mp3">
+</audio>
+<audio id="audio3" loop>
+    <source src="bai3.mp3" type="audio/mp3">
+</audio>
+<audio id="audio5" loop>
+    <source src="bai5.mp3" type="audio/mp3">
 </audio>
 <canvas height="900" id="game" width="1700"></canvas>
-<script>
-    let canvas = document.getElementById('game');
-    let context = canvas.getContext('2d');
-    let ball = {
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        dx: 10,
-        dy: 10,
-        radius: 50,
-    };
-
-</script>
 </body>
 </html>
