@@ -1,16 +1,16 @@
 let canvas = document.getElementById('game');
 let context = canvas.getContext('2d');
 let running = false;
+let score = 0;
 
-let ball = {
+let balls = [{
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
-    dx: 20,
-    dy: 20,
-    radius: 50,
-};
-
-function drawBall() {
+    dx: 10,
+    dy: 10,
+    radius: 100,
+}];
+function drawBall(ball) {
     let gradient = context.createLinearGradient(ball.x, ball.y - ball.radius, ball.x, ball.y + ball.radius);
     gradient.addColorStop(0, '#33ccff');
     gradient.addColorStop(1, '#ff99cc');
@@ -22,7 +22,7 @@ function drawBall() {
     context.closePath();
 }
 
-function updateBallPosition() {
+function updateBallPosition(ball) {
     ball.x += ball.dx;
     ball.y += ball.dy;
 
@@ -37,17 +37,26 @@ function updateBallPosition() {
 function run() {
     if (!running) return;
     context.clearRect(0, 0, canvas.width, canvas.height);
-    drawBall();
-    updateBallPosition();
+    drawBall(balls[balls.length - 1]);
+    updateBallPosition(balls[balls.length - 1]);
+    context.font = "30px Arial";
+    context.fillText("Score: " + score, 10, 50);
     requestAnimationFrame(run);
 }
 
 canvas.addEventListener('click', function (event) {
+    let ball = balls[balls.length - 1];
     let distX = Math.abs(ball.x - event.clientX);
     let distY = Math.abs(ball.y - event.clientY);
     if (distX < ball.radius && distY < ball.radius) {
-        alert('Hit!');
-        running = false;
+        score++;
+        balls.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            dx: ball.dx +10,
+            dy:  ball.dy +10,
+            radius: ball.radius -5,
+        });
     }
 });
 
@@ -65,18 +74,4 @@ document.getElementById('start').addEventListener('click', function () {
         audio = 'audio5';
     }
     document.getElementById(audio).play();
-});
-document.getElementById('increaseSpeed').addEventListener('click', function () {
-    ball.dx *= 1.2;
-    ball.dy *= 1.2;
-});
-document.getElementById('increaseSize').addEventListener('click', function () {
-    ball.radius *= 1.2;
-});
-document.getElementById('downSpeed').addEventListener('click', function () {
-    ball.dx /= 1.2;
-    ball.dy /= 1.2;
-});
-document.getElementById('downSize').addEventListener('click', function () {
-    ball.radius /= 1.2;
 });
