@@ -10,6 +10,7 @@ let balls = [{
     dy: 10,
     radius: 100,
 }];
+
 function drawBall(ball) {
     let gradient = context.createLinearGradient(ball.x, ball.y - ball.radius, ball.x, ball.y + ball.radius);
     gradient.addColorStop(0, '#33ccff');
@@ -33,14 +34,16 @@ function updateBallPosition(ball) {
         ball.dy = -ball.dy;
     }
 }
-
 function run() {
     if (!running) return;
     context.clearRect(0, 0, canvas.width, canvas.height);
-    drawBall(balls[balls.length - 1]);
-    updateBallPosition(balls[balls.length - 1]);
+    let ball = balls[balls.length - 1];
+    drawBall(ball);
+    updateBallPosition(ball);
     context.font = "30px Arial";
     context.fillText("Score: " + score, 10, 50);
+    context.fillText("Speed: dx=" + ball.dx + ", dy=" + ball.dy, 10, 90);
+    context.fillText("Size: " + ball.radius, 10, 130);
     requestAnimationFrame(run);
 }
 
@@ -53,9 +56,9 @@ canvas.addEventListener('click', function (event) {
         balls.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            dx: ball.dx +10,
-            dy:  ball.dy +10,
-            radius: ball.radius -5,
+            dx: ball.dx + 5,
+            dy:  ball.dy + 5,
+            radius: ball.radius - 5,
         });
     }
 });
