@@ -67,12 +67,10 @@ document.getElementById('start').addEventListener('click', function () {
     running = true;
     run();
     let audio = Math.random();
-    if (audio < 0.25) {
+    if (audio < 0.3) {
         audio = 'audio2';
-    } else if (audio < 0.5) {
+    } else if (audio < 0.6) {
         audio = 'audio3';
-    } else if (audio < 0.75) {
-        audio = 'audio4';
     } else {
         audio = 'audio5';
     }
